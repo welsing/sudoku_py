@@ -1,7 +1,7 @@
 ## CRIAR MATRIZ 6X6
 # M = []
-
-
+from random import randint
+from time import sleep
 ## GERAR TABULEIRO VAZIO 
 def empty_table():
     table = []            
@@ -11,11 +11,7 @@ def empty_table():
     return table
 
 
-## RANDOMIZA INICIO DE JOGO 
-def random_start():
-    print("ENGINE...")
-
-
+## Visualiza Tabuleiro
 def view_table(tab):
     line_labels = "ABCDEFGHI"
     print("="*26)
@@ -53,8 +49,42 @@ def view_table(tab):
         
 
 
+# Função auxiliar da random_game()
+def is_safe(table, line, col, num):
+    if num in table[line]:
+        return False
+    
+
+    if num in [table[r][col] for r in range(9)]:
+        return False
+    
+    return True
+
+
+def random_game(table):
+
+
+    for i, linha in enumerate(table):
+
+        for j, coluna in enumerate(linha):
+
+            while True:
+                n = randint(1, 9)
+                # if n not in table[i]:
+                #     table[i][j] = n
+                
+                if is_safe(table, i, j, n):
+                    table[i][j] = n
+                    break
+
+
+
+
 tabuleiro = empty_table()
 
 
 view_table(tabuleiro)
+random_game(tabuleiro)
+view_table(tabuleiro)
+
 
